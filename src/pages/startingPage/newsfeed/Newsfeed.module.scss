@@ -1,0 +1,77 @@
+ .mainPost {
+     width: 40rem;
+     border: transparent;
+     background-color: whitesmoke;
+
+     .userInfo {
+         display: flex;
+         margin: 0 1 rem;
+         justify-content: space-between;
+         align-items: center;
+
+         a {
+             text-decoration: none;
+             color: black;
+
+             &:hover {
+                 text-decoration: underline;
+             }
+         }
+
+         .profilePictureImg {
+             height: 3rem;
+             width: 3rem;
+             border-radius: 50%;
+             object-fit: cover;
+             margin-right: 0.3rem;
+         }
+
+         .contextMenu {
+             border-radius: 50%;
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             cursor: pointer;
+
+             &:hover {
+                 border: 1px solid teal;
+             }
+         }
+
+     }
+
+     .content {
+         display: flex;
+         flex-direction: column;
+         justify-content: center;
+         align-items: center;
+
+         p {
+             margin: 0.2rem 1rem;
+             align-self: flex-start;
+             text-align: justify;
+         }
+
+         .imageWrapper {
+             position: relative;
+
+             .mainPostImage {
+                 max-width: 100%;
+             }
+
+             .infoIcon {
+                 cursor: pointer;
+                 position: absolute;
+                 right: 3rem;
+                 color: teal;
+                 bottom: -1rem;
+             }
+         }
+     }
+
+     .reacts {
+         display: flex;
+         justify-content: space-around;
+         margin: 0.5rem;
+     }
+ }
