@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import Navigation from './Navigation.jsx';
+import styles from './Layout.module.scss';
 
 const Layout = ({children}) => {
     return (
         <>
         <Navigation></Navigation>
-            <main>{children}</main>
+            <main className={styles.mainContent}>{children}</main>
         </>
     )
 }

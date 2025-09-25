@@ -6,13 +6,13 @@ const StartingPage = () => {
     const posts = useFetch('https://jsonplaceholder.typicode.com/posts');
     return (
         <div className={styles.mainContainer}>
-            <aside>Left side(folosim components leftside)</aside>
+            <aside className={styles.leftAside}>Left side(folosim components leftside)</aside>
             <section className={styles.newsfeed}>
                 {posts && posts.map(post => {
                     return <Newsfeed postData={post} key={post.id}></Newsfeed>
                 })}
             </section>
-            <aside>Right side(folosim components rightside)</aside>
+            <aside className={styles.rightAside}>Right side(folosim components rightside)</aside>
         </div>
     )
 }

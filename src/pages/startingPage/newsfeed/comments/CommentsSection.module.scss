@@ -1,0 +1,117 @@
+.commentsInputContainer {
+  background: #f0f2f5;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+
+  >div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+
+    img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid #e4e6eb;
+    }
+
+    form {
+      flex: 1;
+      display: flex;
+      gap: 1rem;
+
+      input {
+        width: 100%;
+        border: none;
+        background: #fff;
+        border-radius: 18px;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+        outline: none;
+        transition: box-shadow 0.2s;
+
+        &:focus {
+          box-shadow: 0 0 0 2px #1877f2;
+        }
+      }
+
+      button {
+        background: #1877f2;
+        color: #fff;
+        border: none;
+        border-radius: 16px;
+        padding: 0.4rem 1.2rem;
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+
+        &:hover {
+          background: #145db2;
+        }
+      }
+    }
+  }
+}
+
+.commentsList {
+  max-height: 250px; // sau cât vrei tu
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.comments {
+  display: flex;
+  flex-direction: column; // schimbă pe coloană
+  align-items: flex-start;
+  gap: 0.2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e4e6eb;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .profilePictureImg {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #e4e6eb;
+  }
+
+  span {
+    font-weight: 600;
+    color: #050505;
+    font-size: 0.95rem;
+  }
+}
+
+.commentInfo {
+  background: #fff;
+  border-radius: 18px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.2rem;
+
+  p {
+    margin: 0 0 0.2rem 0;
+    color: #050505;
+    font-size: 0.98rem;
+    word-break: break-word;
+  }
+}

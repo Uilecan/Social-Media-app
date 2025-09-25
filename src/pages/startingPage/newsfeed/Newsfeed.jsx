@@ -13,6 +13,7 @@ import CommentIcon from '@mui/icons-material/Comment';
 import profile from '../../../assets/icons/profile.jpeg';
 import post1 from '../../../assets/images/post1.jpeg';
 import post2 from '../../../assets/images/post2.jpg';
+import CommentsSection from './comments/CommentsSection';
 
 const Newsfeed = ({ postData }) => {
     const [isLiked, setIsLiked] = useState(false);
@@ -47,10 +48,10 @@ const Newsfeed = ({ postData }) => {
         <div className={styles.mainPost}>
             <div className={styles.userInfo}>
 
-                <Link to='/me'>
+                <Link to={`/profile/${postData.id}`}>
                     <img src={profile} alt="Profile Picture" className={styles.profilePictureImg} />
                 </Link>
-                <Link to='/me'>Userul meu</Link>
+                <Link to={`/profile/${postData.id}`}>Userul meu</Link>
                 <div className={styles.contextMenu}>
                     <MoreHorizIcon></MoreHorizIcon>
                 </div>
@@ -68,29 +69,33 @@ const Newsfeed = ({ postData }) => {
 
             <section className={styles.reacts}>
                 <div className={styles.likesnumber}>
-                    <ThumbIcon fontSize='small' color='primary' />
+                    <ThumbIcon />
                     <span className={styles.reactCounts}>{likes}</span>
                 </div>
                 <div className={styles.share}>
-                    <ShareIcon fontSize='small' color='primary' />
+                    <ShareIcon />
                     <span className={styles.reactCounts}>{shares}</span>
                 </div>
             </section>
 
             <section className={styles.reactActions}>
                 <div className={`${styles.reaction} ${isLiked && styles.blue}`} onClick={handleLike}>
-                    <ThumbIcon fontSize='small' color='primary' />
+                    <ThumbIcon />
                     <span>Like</span>
                 </div>
 
                 <div className={styles.reaction}>
-                    <CommentIcon fontSize='small' color='primary' />
+                    <CommentIcon />
                     <span>Comment</span>
                 </div>
                 <div className={`${styles.reaction} ${isShared && styles.blue}`} onClick={handleShare}>
-                    <ShareIcon fontSize='small' color='primary' />
+                    <ShareIcon />
                     <span>Share</span>
                 </div>
+            </section>
+
+            <section className={styles.commentContainer}>
+                <CommentsSection />
             </section>
         </div>
     );
