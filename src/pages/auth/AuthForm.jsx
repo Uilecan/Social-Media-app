@@ -1,29 +1,59 @@
 import React, { useState } from 'react';
 import styles from './AuthForm.module.scss';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginUser, registerUser } from '../../redux/slices/authSlice';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../redux/selectors';
 
 const AuthForm = () => {
     const [isLogin, setIsLogin] = useState(true);
-    const [isError, setIsError] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
+    const user = useSelector(selectUser);
+
     const navigate = useNavigate();
 
-    const submitHandler = (event) => {
-        event.preventDefault();
-        navigate('/');
+    const dispatch = useDispatch();
 
+    const submitHandler = async (event) => {
+        event.preventDefault();
+
+        const payload = {
+            email: username,
+            password: password
+        };
+
+        try {
+            if (isLogin) {
+
+                await dispatch(loginUser(payload)).unwrap();
+                if (user.isAuthenticated) {
+                    navigate('/');
+                }
+
+            } else {
+                await dispatch(registerUser(payload)).unwrap();
+
+
+
+            }
+        } catch (err) {
+            console.error('Auth error:', err);
+
+        }
     }
 
     const actionIsNotLoading = (
-        <button>{isLogin ? 'Login' : 'Create new Account'}</button>
+        <button type='submit'>{isLogin ? 'Login' : 'Create new Account'}</button>
     );
 
     const toggleAuthState = () => {
         setIsLogin((prevState) => !prevState);
     }
+
+
 
     return (
         <div className={styles.auth}>
@@ -50,9 +80,9 @@ const AuthForm = () => {
                     />
                 </div>
                 <div className={styles.actions}>
-                    {isError && <p>Please try again</p>}
-                    {isLoading && <p>Sending request ...</p>}
-                    {!isLoading && actionIsNotLoading}
+                    {user.loading && <p>Please try again</p>}
+                    {user.error && <p>Sending request ...</p>}
+                    {!user.loading && actionIsNotLoading}
                     <button type='button' className={styles.toggle} onClick={toggleAuthState}>
                         {isLogin ? 'Create new account' : 'Login with existing account'}
                     </button>

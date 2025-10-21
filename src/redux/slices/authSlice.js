@@ -1,4 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import authService from '../../services/authService';
+
 
 //Optional, poate fi folosit in loc de redux-persist
 

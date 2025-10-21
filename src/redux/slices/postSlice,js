@@ -1,0 +1,46 @@
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+
+
+
+const initialState = {
+
+    status: "idle",
+    id: 0,
+    title: '',
+    description: ''
+
+}
+
+export const getPosts = createAsyncThunk('post/get', async () => {
+    const { data } = await postService()
+
+    localStorage.setItem('token', data.accessToken)
+    return data;
+})
+
+
+const postSlice = createSlice({
+    name: "post",
+    initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder
+            .addCase(getPosts.pending, (state, _action) => {
+                state.title = '';
+                state.description = '';
+            })
+            .addCase(getPosts.fulfilled, (state, _action) => {
+                state.title = action.payload.title;
+                state.description = action.payload.description;
+            })
+            .addCase(getPosts.rejected, (state, _action) => {
+                state.title = '';
+                state.description = '';
+            })
+    }
+})
+
+
+
+export const postReducer = postSlice.reducer;

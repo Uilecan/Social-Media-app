@@ -14,12 +14,17 @@ import profile from '../../../assets/icons/profile.jpeg';
 import post1 from '../../../assets/images/post1.jpeg';
 import post2 from '../../../assets/images/post2.jpg';
 import CommentsSection from './comments/CommentsSection';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../../redux/selectors';
 
 const Newsfeed = ({ postData }) => {
     const [isLiked, setIsLiked] = useState(false);
     const [likes, setLikes] = useState(Math.floor(Math.random() * 100));
     const [isShared, setIsShared] = useState(false);
     const [shares, setShared] = useState(Math.floor(Math.random() * 100));
+
+    const user = useSelector(selectUser);
+    
     const postImages = {
         0: post1,
         1: post2
@@ -46,6 +51,7 @@ const Newsfeed = ({ postData }) => {
     }
     return (
         <div className={styles.mainPost}>
+            
             <div className={styles.userInfo}>
 
                 <Link to={`/profile/${postData.id}`}>
