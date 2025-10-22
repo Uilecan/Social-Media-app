@@ -3,6 +3,10 @@
      border: transparent;
      background-color: whitesmoke;
      margin: 1rem 0;
+     border-radius: 12px;
+     overflow: hidden;
+     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
 
      .userInfo {
          display: flex;
@@ -74,6 +78,18 @@
          display: flex;
          justify-content: space-between;
          margin: 0.5rem;
+
+         .commentsnumber {
+             display: flex;
+             align-items: center;
+             gap: 0.3rem;
+         }
+
+         .share {
+             display: flex;
+             align-items: center;
+             gap: 0.3rem;
+         }
      }
 
      .reactActions {
@@ -98,7 +114,16 @@
              }
          }
 
-
+         .commentCounter {
+             background: #e9eef8;
+             color: #1877f2;
+             font-weight: 600;
+             font-size: 0.75rem;
+             padding: 0.12rem 0.5rem;
+             border-radius: 12px;
+             margin-left: 0.5rem;
+             display: inline-block;
+         }
 
      }
  }

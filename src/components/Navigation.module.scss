@@ -3,43 +3,57 @@ header {
     height: 5rem;
     background-color: teal;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: fixed;
     top: 0;
     z-index: 10;
+}
 
-    .logo {
+.navInner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    padding-left: 1rem;
+    color: white;
+    font-size: 1.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding-right: 1rem;
+    gap: 1rem;
+}
+
+.menuItem {
+    margin: 0;
+
+    a {
+        text-decoration: none;
         color: white;
-        font-size: 2rem;
-        margin: 0;
-    }
+        white-space: nowrap;
+        font-weight: bold;
+        padding: 0.4rem 0.6rem;
+        border-radius: 6px;
+        transition: background 0.15s, color 0.15s;
 
-    .menu {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        align-items: baseline;
+        &:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
 
-        .menuItem {
-            margin: 0 1rem;
-
-            a {
-                text-decoration: none;
-                color: white;
-                white-space: nowrap;
-                font-weight: bold;
-
-                &:global.active {
-                    color: yellow
-                }
-
-                &:hover {
-                    color: lightblue;
-                }
-            }
+        &.active,
+        :global(.active) {
+            background: rgba(255, 255, 255, 0.12);
+            color: yellow;
         }
     }
 }

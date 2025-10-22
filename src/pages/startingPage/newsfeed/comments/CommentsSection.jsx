@@ -1,10 +1,10 @@
 import profileImg from '../../../../assets/icons/profile.jpeg';
-import { useState } from 'react';
 import styles from './CommentsSection.module.scss';
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 //https://www.mockaroo.com/ for the data
-const USER_DATA = [
+export const USER_DATA = [
     {
         "id": 1,
         "firstName": "Shay",
@@ -23,11 +23,19 @@ const USER_DATA = [
     { "id": 9, "firstName": "Burg", "lastName": "Roe", "fullName": "Burg Roe", "date": "12/23/2024", "profileImage": "http://dummyimage.com/121x100.png/5fa2dd/ffffff", "comment": "nam dui proin leo odio porttitor id consequat in consequat ut" },
     { "id": 10, "firstName": "Mattias", "lastName": "Tolle", "fullName": "Mattias Tolle", "date": "7/11/2025", "profileImage": "http://dummyimage.com/103x100.png/5fa2dd/ffffff", "comment": "natoque penatibus et magnis dis parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum" }]
 
-const CommentsSection = () => {
+const CommentsSection = ({ onCountChange }) => {
     const [newComment, setNewComment] = useState('');
     const [listOfComments, setListOfComments] = useState(USER_DATA);
 
-    const submitHandler = () => {
+    useEffect(() => {
+        if (typeof onCountChange === 'function') {
+            onCountChange(listOfComments.length);
+        }
+    }, [listOfComments, onCountChange]);
+
+    const submitHandler = (e) => {
+        e.preventDefault();
+        if (!newComment.trim()) return;
         setListOfComments(prevState => {
             const myComment = {
                 id: prevState.length,
@@ -45,28 +53,33 @@ const CommentsSection = () => {
         <section className={styles.commentsInputContainer}>
             <div>
                 <img src={profileImg} alt="" />
-                <form onSubmit={e => { e.preventDefault(); submitHandler(); }}>
-                    <input type="text" placeholder='Write a comment...' onChange={(e) => setNewComment(e.target.value)} />
+                <form onSubmit={submitHandler}>
+                    <input
+                        type="text"
+                        placeholder='Write a comment...'
+                        value={newComment}
+                        onChange={(e) => setNewComment(e.target.value)}
+                    />
                     <button type="submit">Add Comment</button>
                 </form>
             </div>
             <div className={styles.commentsList}>
-            {listOfComments && listOfComments.map((comment, id) => {
-                return (
-                    <div className={styles.comments} key={id}>
-                        <div className={styles.userInfo}>
-                            <Link to='/'>
-                                <img src={profileImg} alt="Profile pic" className={styles.profilePictureImg} />
-                                <span>{comment.fullName}</span>
-                            </Link>
+                {listOfComments && listOfComments.map((comment, id) => {
+                    return (
+                        <div className={styles.comments} key={id}>
+                            <div className={styles.userInfo}>
+                                <Link to='/'>
+                                    <img src={profileImg} alt="Profile pic" className={styles.profilePictureImg} />
+                                    <span>{comment.fullName}</span>
+                                </Link>
+                            </div>
+                            <div className={styles.commentInfo}>
+                                <p>{comment.comment}</p>
+                                <p className={styles.timeOfPost}>{comment.date}</p>
+                            </div>
                         </div>
-                        <div className={styles.commentInfo}>
-                            <p>{comment.comment}</p>
-                            <p className={styles.timeOfPost}>{comment.date}</p>
-                        </div>
-                    </div>
-                )
-            })}
+                    )
+                })}
             </div>
         </section>
     )

@@ -19,28 +19,30 @@ const Navigation = () => {
 
     return (
         <header>
-            <Link to="/">
-                <div className={styles.logo}>Social Media App</div>
-            </Link>
+            <div className={styles.navInner}>
+                <Link to="/">
+                    <div className={styles.logo}>SpotMe</div>
+                </Link>
 
-            <nav>
-                <ul className={styles.menu}>
-                    {isLoggedIn && <>
-                        <li className={styles.menuItem}>
-                            <NavLink to="/my-profile" >My Profile</NavLink>
-                        </li>
-                        <li className={styles.menuItem}>
-                            <NavLink to="/friends">Friends</NavLink>
-                        </li>
+                <nav>
+                    <ul className={styles.menu}>
+                        {isLoggedIn && <>
+                            <li className={styles.menuItem}>
+                                <NavLink to="/my-profile" >My Profile</NavLink>
+                            </li>
+                            <li className={styles.menuItem}>
+                                <NavLink to="/friends">Friends</NavLink>
+                            </li>
 
-                    </>}
-                    <li className={styles.menuItem} onClick={toggleAuth}>
-                        <NavLink to="/auth">{isLoggedIn ? "Logout" : "Login"}</NavLink>
-                    </li>
-                    <li>{user.email}</li>
-                </ul>
-            </nav>
-        </header>
+                        </>}
+                        <li className={styles.menuItem} onClick={toggleAuth}>
+                            <NavLink to="/auth">{isLoggedIn ? "Logout" : "Login"}</NavLink>
+                        </li>
+                        <li>{user.email}</li>
+                    </ul>
+                </nav>
+            </div>
+        </header >
     )
 }
 

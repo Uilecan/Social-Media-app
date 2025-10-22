@@ -13,18 +13,24 @@ import CommentIcon from '@mui/icons-material/Comment';
 import profile from '../../../assets/icons/profile.jpeg';
 import post1 from '../../../assets/images/post1.jpeg';
 import post2 from '../../../assets/images/post2.jpg';
-import CommentsSection from './comments/CommentsSection';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../../redux/selectors';
+import CommentsSection, { USER_DATA } from './comments/CommentsSection';
 
 const Newsfeed = ({ postData }) => {
     const [isLiked, setIsLiked] = useState(false);
     const [likes, setLikes] = useState(Math.floor(Math.random() * 100));
     const [isShared, setIsShared] = useState(false);
     const [shares, setShared] = useState(Math.floor(Math.random() * 100));
+    const [isCommentsVisible, setIsCommentsVisible] = useState(false);
+    const [commentCount, setCommentCount] = useState(USER_DATA.length);
+
+    const toggleComments = () => {
+        setIsCommentsVisible(prev => !prev);
+    };
 
     const user = useSelector(selectUser);
-    
+
     const postImages = {
         0: post1,
         1: post2
@@ -51,7 +57,7 @@ const Newsfeed = ({ postData }) => {
     }
     return (
         <div className={styles.mainPost}>
-            
+
             <div className={styles.userInfo}>
 
                 <Link to={`/profile/${postData.id}`}>
@@ -78,9 +84,15 @@ const Newsfeed = ({ postData }) => {
                     <ThumbIcon />
                     <span className={styles.reactCounts}>{likes}</span>
                 </div>
+                <div className={styles.commentsnumber}>
+
+                    <span className={styles.reactCounts}>{commentCount}</span>
+                    <span>comments</span>
+                </div>
+
                 <div className={styles.share}>
-                    <ShareIcon />
                     <span className={styles.reactCounts}>{shares}</span>
+                    <span>shares</span>
                 </div>
             </section>
 
@@ -89,20 +101,17 @@ const Newsfeed = ({ postData }) => {
                     <ThumbIcon />
                     <span>Like</span>
                 </div>
-
-                <div className={styles.reaction}>
+                <div className={styles.reaction} onClick={toggleComments}>
                     <CommentIcon />
                     <span>Comment</span>
                 </div>
+
                 <div className={`${styles.reaction} ${isShared && styles.blue}`} onClick={handleShare}>
                     <ShareIcon />
                     <span>Share</span>
                 </div>
             </section>
-
-            <section className={styles.commentContainer}>
-                <CommentsSection />
-            </section>
+            {isCommentsVisible && <CommentsSection onCountChange={setCommentCount} />}
         </div>
     );
 }
